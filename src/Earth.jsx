@@ -2,19 +2,28 @@ import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
-const Earth = () => {
-    const [earthTexture] = useTexture(['/assets/earth_day.jpg']);
+const Earth = ({displacementScale}) => {
+    const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap] = useTexture([
+        '/assets/earth_day.jpg',
+        '/assets/earth_normal.jpg',
+        '/assets/earth_specular.jpg',
+        '/assets/earth_displacement.jpg',
+    ]);
 
     const earthRef = useRef();
     useFrame(()=>{
-        // earthRef.current.rotation.x += 0.0002;
-        // earthRef.current.rotation.y += 0.0002;
-        earthRef.current.rotation.y += 0.01;
+        earthRef.current.rotation.y += 0.001;
     })
 
     return <mesh ref={earthRef}>
         <sphereGeometry args={[1,32,32]}></sphereGeometry> 
-        <meshStandardMaterial map={earthTexture}/> /* radius, X -axis, Y - axis *   color='blue'/
+        <meshPhongMaterial 
+        map={earthTexture} 
+        normalMap={earthNormalMap} 
+        specularMap={earthSpecularMap}
+        displacementMap={earthDisplacementMap}
+        displacementScale={displacementScale}
+        /> /* radius, X -axis, Y - axis *   color='blue'/
     </mesh> 
 } 
 
