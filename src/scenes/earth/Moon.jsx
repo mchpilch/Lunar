@@ -8,15 +8,17 @@ const Moon = () => {
     ]);
 
     const moonRef = useRef();
+    const Amp = 4;
+    const Freq = 2;
     useFrame(({clock})=>{
-        moonRef.current.position.x = Math.sin(clock.getElapsedTime() * 0.5) * 4; {/*first is how fast second amplitude*/}
-        moonRef.current.position.z = Math.cos(clock.getElapsedTime() * 0.5) * 4;
+        moonRef.current.position.x = Math.sin(clock.getElapsedTime() * Freq) * Amp; {/*first is how fast second amplitude*/}
+        moonRef.current.position.z = Math.cos(clock.getElapsedTime() * Freq) * Amp;
 
         moonRef.current.rotation.y += 0.001;
     })
 
     return <mesh ref={moonRef} 
-    position={[0,0,5]}
+    position={[0,0,Amp]}
     castShadow
     > 
     {/* 60.3 */}

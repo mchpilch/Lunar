@@ -2,8 +2,9 @@ import { useHelper } from "@react-three/drei";
 import { useRef } from "react";
 import * as  THREE from 'three';
 import AnimatedStars from "./AnimatedStars";
-import Earth from "./Earth";
-import Moon from "./Moon";
+import Earth from "./scenes/earth/Earth";
+import Moon from "./scenes/earth/Moon";
+import ISS from "./scenes/earth/ISS";
 
 const MainContainer = () => {
     const directionalLightRef = useRef();
@@ -19,7 +20,8 @@ const MainContainer = () => {
         {/* <ambientLight intensity={4} /> */}
         <group>
             <Earth displacementScale={0.075} />
-            <Moon />
+            <ISS />
+            {/* <Moon /> */}
         </group>
     </>);
 }
