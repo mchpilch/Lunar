@@ -12,18 +12,21 @@ const Earth = ({displacementScale}) => {
 
     const earthRef = useRef();
     useFrame(()=>{
-        earthRef.current.rotation.y += 0.001;
+         earthRef.current.rotation.y += 0.001;
     })
 
-    return <mesh ref={earthRef}>
+    return <mesh ref={earthRef}
+    receiveShadow>
         <sphereGeometry args={[1,32,32]}></sphereGeometry> 
         <meshPhongMaterial 
         map={earthTexture} 
         normalMap={earthNormalMap} 
+        shininess={2500}
         specularMap={earthSpecularMap}
         displacementMap={earthDisplacementMap}
         displacementScale={displacementScale}
-        /> /* radius, X -axis, Y - axis *   color='blue'/
+        // /* radius, X -axis, Y - axis *   color='blue'/
+        /> 
     </mesh> 
 } 
 
