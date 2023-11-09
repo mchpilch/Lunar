@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import React, { useRef, useCallback } from "react";
 import * as THREE from 'three'
 
-const Moon = (() => {
+const Moon = React.memo(() => {
     {/*first is how fast second amplitude
     // time it takes for the Moon to rotate once on its axis is equal to 
     // the time it takes for the Moon to orbit once around Earth. 
@@ -20,7 +20,7 @@ const Moon = (() => {
     const updateMoonPosition = useCallback(() => {
         moonRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * Freq) * Amp; {/*first is how fast second amplitude*/ }
         moonRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * Freq) * Amp;
-      }, [])
+    }, [])
     useFrame(() => {
         updateMoonPosition()
         moonRef.current.rotation.y += 0.005;

@@ -14,7 +14,7 @@ const Earth = React.memo(({ displacementScale }) => {
     const earthRef = useRef();
     useFrame(() => {
         earthRef.current.rotation.y += 0.022;
-    }, [])
+    })
 
     return <mesh ref={earthRef} castShadow
         receiveShadow>

@@ -8,6 +8,7 @@ import Moon from "./scenes/earth/Moon";
 import ISS from "./scenes/earth/ISS";
 import Sun from "./scenes/sun/Sun";
 
+
 const MainContainer = () => {
     // const directionalLightRef = useRef();
     // const directionalLightRefTwo = useRef();
@@ -17,11 +18,11 @@ const MainContainer = () => {
     const groupRef = useRef();
 
     const Amp = 8;
-    const AngularSpeed = 0.0025;
-    const updateGroupPosition = useCallback(()=>{
-        const x = groupRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * AngularSpeed) * Amp; 
-        const z = groupRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * AngularSpeed) * Amp;
-        groupRef.current.position.set(x,0,z);
+    const AngularSpeed = 0.1025;
+    const updateGroupPosition = useCallback(() => {
+        const x = Math.sin(clockRef.current.getElapsedTime() * AngularSpeed) * Amp;
+        const z = Math.cos(clockRef.current.getElapsedTime() * AngularSpeed) * Amp;
+        groupRef.current.position.set(x, 0, z);
     }, [])
     useFrame(() => {
         updateGroupPosition();
