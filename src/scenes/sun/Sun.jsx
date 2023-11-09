@@ -16,7 +16,7 @@ const Sun = () => {
     })
 
     return (
-    <mesh ref={sunRef} position={[0, 0, -8]}>
+    <mesh ref={sunRef} position={[0, 0, 0]}>
         <sphereGeometry args={[2, 64, 64]}></sphereGeometry> {/* 110 */}
         <meshPhongMaterial 
             map={sunTexture} 

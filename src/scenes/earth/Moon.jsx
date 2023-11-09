@@ -12,7 +12,7 @@ const Moon = () => {
 
     const moonRef = useRef();
     const Amp = 4;
-    const Freq = 0.5;
+    const Freq = 5;
     useFrame(({ clock }) => {
         moonRef.current.position.x = Math.sin(clock.getElapsedTime() * Freq) * Amp; {/*first is how fast second amplitude*/ }
         moonRef.current.position.z = Math.cos(clock.getElapsedTime() * Freq) * Amp;
