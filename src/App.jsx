@@ -15,7 +15,8 @@ function App() {
       <color attach='background' args={['black']}></color>
       <Perf />
       < CameraPositionLogging event={"mousedown"} />
-      <OrbitControls />
+      {/* <OrbitControls /> */}
+      {/* todo: button to on off orbit controls */}
       <MainContainer />
     </Canvas>
   )

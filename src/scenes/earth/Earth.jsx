@@ -14,7 +14,7 @@ const Earth = React.memo(({ displacementScale }) => {
         '/assets/earth_night.jpg',
     ]);
 
-     const {camera} = useThree();
+    const {camera} = useThree();
     const clockRef = useRef(new THREE.Clock());
     const earthRef = useRef();
 
@@ -30,10 +30,21 @@ const Earth = React.memo(({ displacementScale }) => {
         earthRef.current.rotation.y += 0.022;
         updateEarthPosition();
         const earthPositionRef = earthRef.current.position;
-        console.log('it happens');
+        const cameraTargetPosition = new THREE.Vector3(
+            earthPositionRef.x + 5,
+            earthPositionRef.y + 5,
+            earthPositionRef.z + 5
+        );
+
+    
         if (followingEarth) {
             camera.lookAt(earthPositionRef);
-            console.log('it happens');
+            camera.position.copy(cameraTargetPosition);
+        } else {
+            const defaultCameraTarget = new THREE.Vector3(0,0,0);
+            const defaultCameraPosition = new THREE.Vector3(16,16,16);
+            camera.lookAt(defaultCameraTarget);
+            camera.position.copy(defaultCameraPosition);
         }
     });
 
