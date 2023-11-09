@@ -12,7 +12,8 @@ function App() {
     camera={{fov: 75, near: 0.1, far: 10000, position: [16,16,16]}}
     shadows
     >
-      {/* <Perf /> monitor */}
+       <color attach='background' args={['black']}></color>
+      <Perf /> monitor
       <OrbitControls />
       <MainContainer />
     </Canvas>

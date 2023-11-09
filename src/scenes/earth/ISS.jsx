@@ -1,28 +1,35 @@
 import { useGLTF } from "@react-three/drei";
-import { useMemo } from 'react';
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import React, { useRef, useMemo, useCallback } from "react";
+import * as THREE from 'three'
 
-const ISS = () => {
-    const memorizedISS = useMemo(() => {
-        return useGLTF('assets/ISS/ISS_stationary.gltf');
+const ISS = React.memo(() => {
+    const issRef = useRef()
+    const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
+    const memoizedISS = useMemo(() => {
+      return useGLTF('assets/ISS/ISS_stationary.gltf')
     })
-
-    const issRef = useRef();
     const Amp = 2;
     const Freq = 2;
-
-    useFrame(({ clock }) => {
-        issRef.current.position.x = Math.sin(clock.getElapsedTime() * Freq) * Amp; {/*first is how fast second amplitude*/ }
-        issRef.current.position.z = Math.cos(clock.getElapsedTime() * Freq) * Amp;
-
-        issRef.current.rotation.y += 0.001;
+    const updateISSPosition = useCallback(() => {
+      // Orbit Rotation
+      issRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * Freq) * Amp; {/*first is how fast second amplitude*/ }
+      issRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * Freq) * Amp;
+    }, [])
+    useFrame(() => {
+      updateISSPosition()
     })
+  
     return (
-        <mesh ref={issRef} castShadow>
-            <primitive object={memorizedISS.scene} position={[0, 0, 0]} scale={0.005} />
-        </mesh>
+      <mesh>
+        <primitive
+          ref={issRef}
+          object={memoizedISS.scene}
+          position={[Amp, 0, 0]}
+          scale={0.01}
+        />
+      </mesh>
     )
-}
-
-export default ISS;
+  })
+  
+  export default ISS

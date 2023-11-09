@@ -1,9 +1,9 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 
-const Sun = () => {
+const Sun = React.memo(() => {
     const [sunTexture] = useTexture([
         '/assets/sun.jpg'
     ]);
@@ -16,15 +16,16 @@ const Sun = () => {
     })
 
     return (
-    <mesh ref={sunRef} position={[0, 0, 0]}>
-        <sphereGeometry args={[2, 64, 64]}></sphereGeometry> {/* 110 */}
-        <meshPhongMaterial 
-            map={sunTexture} 
-            emissiveMap={sunTexture} 
-            emissiveIntensity={0.7} 
-            emissive={0xffffff} />
-        <pointLight intensity={250} castShadow />
-    </mesh>
-    )}
+        <mesh ref={sunRef} position={[0, 0, 0]}>
+            <sphereGeometry args={[2, 64, 64]}></sphereGeometry> {/* 110 */}
+            <meshPhongMaterial
+                map={sunTexture}
+                emissiveMap={sunTexture}
+                emissiveIntensity={0.7}
+                emissive={0xffffff} />
+            <pointLight intensity={250} castShadow />
+        </mesh>
+    )
+})
 
 export default Sun;
