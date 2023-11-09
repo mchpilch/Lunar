@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 const Earth = React.memo(({ displacementScale }) => {
     const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap, earthEmissiveMap] = useTexture([
@@ -16,8 +16,15 @@ const Earth = React.memo(({ displacementScale }) => {
         earthRef.current.rotation.y += 0.022;
     })
 
+    const [hovered, hover] = useState(false);
+    useEffect(() => {
+        document.body.style.cursor = hovered ? 'pointer' : 'auto';
+    }, [hovered])
+
     return <mesh ref={earthRef} castShadow
-        receiveShadow>
+        receiveShadow onPointerOver={()=>hover(true)}
+        onPointerOut={()=>hover(false)}
+        >
         <sphereGeometry args={[1, 32, 32]}></sphereGeometry>
         <meshPhongMaterial
             map={earthTexture}
@@ -27,7 +34,7 @@ const Earth = React.memo(({ displacementScale }) => {
             displacementMap={earthDisplacementMap}
             displacementScale={displacementScale}
             emissiveMap={earthEmissiveMap}
-            emissiveIntensity={1.75}
+            emissiveIntensity={hovered ? 8 : 1.75}
             emissive={0xffff00}
         // /* radius, X -axis, Y - axis *   color='blue'/
         />
