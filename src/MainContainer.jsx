@@ -16,10 +16,11 @@ const MainContainer = () => {
 
     const groupRef = useRef();
     const Amp = 8;
-    const Freq = 2.5;
+    const AngularSpeed = 0.0025;
     useFrame(({ clock }) => {
-        groupRef.current.position.x = Math.sin(clock.getElapsedTime() * Freq) * Amp; 
-        groupRef.current.position.z = Math.cos(clock.getElapsedTime() * Freq) * Amp;
+        const x = groupRef.current.position.x = Math.sin(clock.getElapsedTime() * AngularSpeed) * Amp; 
+        const z = groupRef.current.position.z = Math.cos(clock.getElapsedTime() * AngularSpeed) * Amp;
+        groupRef.current.position.set(x,0,z);
     })
 
     return (<>

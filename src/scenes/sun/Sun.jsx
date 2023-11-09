@@ -23,7 +23,7 @@ const Sun = () => {
             emissiveMap={sunTexture} 
             emissiveIntensity={0.7} 
             emissive={0xffffff} />
-        <pointLight intensity={500} castShadow />
+        <pointLight intensity={250} castShadow />
     </mesh>
     )}
 
