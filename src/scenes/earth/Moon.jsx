@@ -3,35 +3,27 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
 const Moon = () => {
+    // time it takes for the Moon to rotate once on its axis is equal to 
+    // the time it takes for the Moon to orbit once around Earth. 
+    // This means that the same side of the Moon always faces our planet.
     const [moonTexture] = useTexture([
         '/assets/moon.jpg'
     ]);
 
     const moonRef = useRef();
     const Amp = 4;
-    const Freq = 2;
-    useFrame(({clock})=>{
-        moonRef.current.position.x = Math.sin(clock.getElapsedTime() * Freq) * Amp; {/*first is how fast second amplitude*/}
+    const Freq = 0.5;
+    useFrame(({ clock }) => {
+        moonRef.current.position.x = Math.sin(clock.getElapsedTime() * Freq) * Amp; {/*first is how fast second amplitude*/ }
         moonRef.current.position.z = Math.cos(clock.getElapsedTime() * Freq) * Amp;
 
-        moonRef.current.rotation.y += 0.001;
+        moonRef.current.rotation.y += 0.005;
     })
-
-    return <mesh ref={moonRef} 
-    position={[0,0,Amp]}
-    castShadow
-    > 
-    {/* 60.3 */}
-        <sphereGeometry args={[0.2725,16,16]}></sphereGeometry> 
-        <meshPhongMaterial
-        map={moonTexture} 
-        // normalMap={earthNormalMap} 
-        // shininess={2500}
-        // specularMap={earthSpecularMap}
-        // displacementMap={earthDisplacementMap}
-        // displacementScale={displacementScale}
-        />
-    </mesh> 
-} 
+    {/* 60.3 */ }
+    return <mesh ref={moonRef} position={[0, 0, Amp]}  castShadow receiveShadow>
+       <sphereGeometry args={[0.6, 16, 16]}></sphereGeometry>  {/* 0.2725 */}
+        <meshPhongMaterial map={moonTexture} />
+    </mesh>
+}
 
 export default Moon;

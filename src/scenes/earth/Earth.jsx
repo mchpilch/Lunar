@@ -15,7 +15,7 @@ const Earth = ({displacementScale}) => {
          earthRef.current.rotation.y += 0.001;
     })
 
-    return <mesh ref={earthRef}
+    return <mesh ref={earthRef} castShadow
     receiveShadow>
         <sphereGeometry args={[1,32,32]}></sphereGeometry> 
         <meshPhongMaterial 
